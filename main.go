@@ -3,7 +3,8 @@ package main
 
 import (
     "net/http"
-
+	"fmt"
+	"os"
     "github.com/gin-gonic/gin"
 )
 
@@ -54,4 +55,25 @@ func main(){
 	router.POST("/albums", postAlbum);
 
 	router.Run("localhost:8080")
+
+
+	file, err := os.Open("file.txt")
+
+	if err != nil {
+		panic(err);
+	}
+
+	defer file.Close()
+
+	b := make([]byte, 1024)
+	_, err = file.Read(b)
+
+	fmt.Println("I work")
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("File: ", string(b))
+
 }
